@@ -48,11 +48,15 @@ public class MiningGame extends JavaPlugin {
         String subCommand = args[0].toLowerCase();
         switch (subCommand) {
             case "start":
+                if (data.isGameActive()) {
+                    player.sendMessage("§cYou already have a MiningGame in progress!");
+                    return true;
+                }
+
                 data.reset();
                 data.setGameActive(true);
                 player.sendMessage("§aYou have started the MiningGame! Begin collecting fuel items!");
                 return true;
-
             case "progress":
                 if (!data.isGameActive()) {
                     player.sendMessage("§cYou haven't started the MiningGame yet! Use §e/mininggame start§c.");
