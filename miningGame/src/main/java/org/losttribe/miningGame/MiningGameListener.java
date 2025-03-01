@@ -1,8 +1,5 @@
 package org.losttribe.miningGame;
 
-import org.losttribe.miningGame.MiningGame;
-import org.losttribe.miningGame.PlayerDataManager;
-import org.losttribe.miningGame.PlayerFuelData;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -31,7 +28,6 @@ public class MiningGameListener implements Listener {
         Player player = (Player) entity;
         PlayerFuelData fuelData = playerDataManager.getData(player);
 
-        // If the player's game isn't active, don't track pickups.
         if (!fuelData.isGameActive()) {
             return;
         }
@@ -40,7 +36,6 @@ public class MiningGameListener implements Listener {
         Material material = pickedUpItem.getType();
         int amount = pickedUpItem.getAmount();
 
-        // Check which material the player picked up
         switch (material) {
             case GLOWSTONE_DUST:
                 fuelData.addGlowstone(amount);
@@ -55,7 +50,6 @@ public class MiningGameListener implements Listener {
                 return;
         }
 
-        // After updating, check if the player has met all requirements
         if (fuelData.hasAllRequiredFuel()) {
             player.sendMessage("§a[MiningGame] You have collected enough fuel to get home!");
             plugin.getServer().broadcastMessage(

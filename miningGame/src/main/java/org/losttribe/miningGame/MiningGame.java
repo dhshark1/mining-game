@@ -1,8 +1,5 @@
 package org.losttribe.miningGame;
 
-import org.losttribe.miningGame.PlayerDataManager;
-import org.losttribe.miningGame.PlayerFuelData;
-import org.losttribe.miningGame.MiningGameListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -14,10 +11,8 @@ public class MiningGame extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Initialize data manager
         playerDataManager = new PlayerDataManager();
 
-        // Register event listener
         getServer().getPluginManager().registerEvents(
                 new MiningGameListener(this, playerDataManager),
                 this
@@ -28,16 +23,11 @@ public class MiningGame extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Cleanup or data-saving logic if needed
         getLogger().info("MiningGame plugin has been disabled!");
     }
 
-    /**
-     * Simple onCommand override to handle /mininggame subcommands.
-     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        // We only have one command: /mininggame
         if (!command.getName().equalsIgnoreCase("mininggame")) {
             return false;
         }
@@ -51,7 +41,6 @@ public class MiningGame extends JavaPlugin {
         PlayerFuelData data = playerDataManager.getData(player);
 
         if (args.length == 0) {
-            // No subcommand given
             player.sendMessage("§eUsage: /mininggame <start|progress|reset>");
             return true;
         }
@@ -59,7 +48,6 @@ public class MiningGame extends JavaPlugin {
         String subCommand = args[0].toLowerCase();
         switch (subCommand) {
             case "start":
-                // Reset counters to 0 and activate the game for this player
                 data.reset();
                 data.setGameActive(true);
                 player.sendMessage("§aYou have started the MiningGame! Begin collecting fuel items!");
@@ -70,7 +58,6 @@ public class MiningGame extends JavaPlugin {
                     player.sendMessage("§cYou haven't started the MiningGame yet! Use §e/mininggame start§c.");
                     return true;
                 }
-                // Show how many items are still needed
                 int neededGlowstone = data.getRequiredCount() - data.getGlowstoneCount();
                 int neededRedstoneDust = data.getRequiredCount() - data.getRedstoneCount();
                 int neededAmethyst = data.getRequiredCount() - data.getAmethystShardCount();
@@ -86,7 +73,6 @@ public class MiningGame extends JavaPlugin {
                         + "§7 / " + data.getRequiredCount()
                         + " §8(need " + Math.max(0, neededAmethyst) + " more)");
 
-                // If the player has completed the requirements:
                 if (data.hasAllRequiredFuel()) {
                     player.sendMessage("§aGreat job! You've collected enough fuel to get home!");
                 }
@@ -104,7 +90,4 @@ public class MiningGame extends JavaPlugin {
         }
     }
 
-    public PlayerDataManager getPlayerDataManager() {
-        return playerDataManager;
-    }
 }
