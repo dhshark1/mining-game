@@ -1,0 +1,9 @@
+name: miningGame
+version: '1.0-SNAPSHOT'
+main: org.losttribe.miningGame.MiningGame
+api-version: '1.21'
+
+commands:
+  mininggame:
+    description: Base command for the MiningGame plugin.
+    usage: /mininggame <start|progress|reset>
