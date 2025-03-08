@@ -85,8 +85,8 @@ public class ArenaObject {
             player.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
             player.sendMessage(ChatColor.GRAY + "Welcome to " + ChatColor.YELLOW + ChatColor.BOLD.toString() + "Mining Game" + ChatColor.GRAY );
             player.sendMessage(ChatColor.GRAY + "You were sent to dig and discover different artifacts. So don't just stand there, get digging! You'll know you found something when a barrel appears upon block break.");
+            main.startMiningGame(player);
         }
-        // RANDOMIZE PLACEMENT? DOESNT IT GET PLACED BY THE BREAKING?
         state = GameState.IN_GAME;
         countdown.Timer();
     }
@@ -103,6 +103,7 @@ public class ArenaObject {
             player.sendMessage(ChatColor.YELLOW + "Congratulations! All artifacts have been found, and the game is over.");
             // INPUT END MESSAGE HERE
             sm.clearScoreboard(player);
+            main.resetMiningGame(player);
         }
         playersList.clear();
         for (Location loc : blocksBroken) { // RUN THIS ASYNC

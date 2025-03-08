@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
-import org.losttribe.miningGame.Commands;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -47,6 +46,26 @@ public class MiningGame extends JavaPlugin implements PluginMessageListener {
         getLogger().info("MiningGame plugin has been enabled!");
     }
 
+    public void startMiningGame(Player player) {
+        PlayerFuelData data = playerDataManager.getData(player);
+
+        if (data.isGameActive()) {
+            player.sendMessage("§cYou already have a MiningGame in progress!");
+            return;
+        }
+
+        data.reset();
+        data.setGameActive(true);
+        player.sendMessage("§aYou have started the MiningGame! Begin collecting fuel items!");
+    }
+
+    public void resetMiningGame(Player player) {
+        PlayerFuelData data = playerDataManager.getData(player);
+        data.reset();
+        data.setGameActive(false);
+        player.sendMessage("§aYour MiningGame progress has been reset. Use /mininggame start to begin again!");
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!command.getName().equalsIgnoreCase("mininggame")) {
@@ -69,14 +88,10 @@ public class MiningGame extends JavaPlugin implements PluginMessageListener {
         String subCommand = args[0].toLowerCase();
         switch (subCommand) {
             case "start":
-                if (data.isGameActive()) {
-                    player.sendMessage("§cYou already have a MiningGame in progress!");
-                    return true;
+                if (sender instanceof Player) {
+                    Player instancePlayer = (Player) sender;
+                    startMiningGame(instancePlayer);
                 }
-
-                data.reset();
-                data.setGameActive(true);
-                player.sendMessage("§aYou have started the MiningGame! Begin collecting fuel items!");
                 return true;
             case "progress":
                 if (!data.isGameActive()) {
@@ -104,9 +119,7 @@ public class MiningGame extends JavaPlugin implements PluginMessageListener {
                 return true;
 
             case "reset":
-                data.reset();
-                data.setGameActive(false);
-                player.sendMessage("§aYour MiningGame progress has been reset. Use /mininggame start to begin again!");
+                resetMiningGame(player);
                 return true;
 
             default:
