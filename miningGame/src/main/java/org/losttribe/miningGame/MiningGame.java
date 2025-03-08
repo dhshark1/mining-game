@@ -4,10 +4,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.losttribe.ArenaObject;
+import org.losttribe.GameState;
+import org.losttribe.SetupYMLER;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiningGame extends JavaPlugin {
 
     private PlayerDataManager playerDataManager;
+    private SetupYMLER ymler;
+    private List<ArenaObject> arenas;
+
+    private String abbrev = "[MG]";
 
     @Override
     public void onEnable() {
@@ -19,11 +29,6 @@ public class MiningGame extends JavaPlugin {
         );
 
         getLogger().info("MiningGame plugin has been enabled!");
-    }
-
-    @Override
-    public void onDisable() {
-        getLogger().info("MiningGame plugin has been disabled!");
     }
 
     @Override
@@ -94,4 +99,95 @@ public class MiningGame extends JavaPlugin {
         }
     }
 
+    public String getAbbrev() {
+        return abbrev;
+    }
+
+    public List<String> getAllArenaNames() {
+        List<String> l = new ArrayList<>();
+        if (!arenas.isEmpty()) {
+            for (ArenaObject ar : arenas) {
+                l.add(ar.getArenaName());
+            }}
+        return l;
+    }
+
+    public boolean isAnActiveArena(String arenaName) {
+        if (!arenas.isEmpty()) {
+            for (ArenaObject ar : arenas) {
+                if (ar.getArenaName().equals(arenaName)) {
+                    return true;
+                }
+            }}
+        return false;
+    }
+
+    public void removeArena(String arenaName) {
+        if (!arenas.isEmpty()) {
+            if (isAnActiveArena(arenaName)) {
+                ArenaObject ar = getArenaByName(arenaName);
+                arenas.remove(ar);
+            }}
+    }
+
+    public void updateArena(ArenaObject newArena) {
+        if (!arenas.isEmpty()) {
+
+            if (isAnActiveArena(newArena.getArenaName())) {
+                ArenaObject oldArena = getArenaByName(newArena.getArenaName());
+                arenas.remove(oldArena);
+            }
+            arenas.add(newArena);
+        }
+    }
+
+    public void reloadAllArenas() {
+        arenas = ymler.getAllArenas();
+    }
+
+    public Boolean isPlayerInAGame(Player player) {
+        if (!arenas.isEmpty()) {
+
+            for (ArenaObject ar : arenas) {
+                if (ar.isPlayerInGame(player)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public ArenaObject getArenaByPlayer(Player player) {
+        if (!arenas.isEmpty()) {
+            if (isPlayerInAGame(player)) {
+                for (ArenaObject ar: arenas) {
+                    if (ar.isPlayerInGame(player)) {
+                        return ar;
+                    }
+                }
+            }}
+        return null;
+    }
+
+    public ArenaObject getArenaByName(String arenaName) {
+        if (!arenas.isEmpty()) {
+            for (ArenaObject ar : arenas) {
+                if (ar.getArenaName().equals(arenaName)) {
+                    return ar;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onDisable() {
+        if (!arenas.isEmpty()) {
+            for (ArenaObject ar : arenas) {
+                if (ar.getState() == GameState.IN_GAME) {
+                    ar.stopGame();
+                }
+            }
+        }
+        getLogger().info("MiningGame plugin has been disabled!");
+    }
 }
