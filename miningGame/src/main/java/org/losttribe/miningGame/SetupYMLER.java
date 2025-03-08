@@ -1,13 +1,11 @@
-package org.losttribe;
+package org.losttribe.miningGame;
 
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
-import org.losttribe.miningGame.MiningGame;
 
 import java.io.File;
 import java.io.IOException;

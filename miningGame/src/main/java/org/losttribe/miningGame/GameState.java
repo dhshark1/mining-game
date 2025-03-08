@@ -1,4 +1,4 @@
-package org.losttribe;
+package org.losttribe.miningGame;
 
 public enum GameState {
 

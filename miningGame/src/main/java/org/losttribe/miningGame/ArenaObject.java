@@ -1,11 +1,10 @@
-package org.losttribe;
+package org.losttribe.miningGame;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.losttribe.miningGame.MiningGame;
 
 import java.util.*;
 
@@ -92,32 +91,8 @@ public class ArenaObject {
         countdown.Timer();
     }
 
-    public Material getBlockToMine() {
-        return blockToMine;
-    }
-
-    public Integer getBreakCount() {
-        return breakCount;
-    }
-
     public ScoreboardManager getSm() {
         return sm;
-    }
-
-    public ItemStack getArtifact() throws Exception {
-        if (playingArtifacts.size() >= 1) {
-            ItemStack item = playingArtifacts.get(0);
-            playingArtifacts.remove(0);
-            return item;
-        } else if (playingArtifacts.isEmpty()) {
-            stopGame();
-            throw new Exception("Game over");
-        }
-        throw new Exception("Error");
-    }
-
-    public void addBlockBroken(Location loc) {
-        blocksBroken.add(loc);
     }
 
     public void stopGame() {

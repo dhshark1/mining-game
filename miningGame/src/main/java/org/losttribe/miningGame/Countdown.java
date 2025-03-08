@@ -1,9 +1,8 @@
-package org.losttribe;
+package org.losttribe.miningGame;
 
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.losttribe.miningGame.MiningGame;
 
 public class Countdown {
     private MiningGame main;

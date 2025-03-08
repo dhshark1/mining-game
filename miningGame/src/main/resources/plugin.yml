@@ -7,3 +7,6 @@ commands:
   mininggame:
     description: Base command for the MiningGame plugin.
     usage: /mininggame <start|progress|reset>
+  shipfuel:
+    description: the command of the plugin
+    usage: /shipfuel

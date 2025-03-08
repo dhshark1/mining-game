@@ -1,15 +1,12 @@
-package org.losttribe;
+package org.losttribe.miningGame;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.losttribe.miningGame.MiningGame;
 
 import java.util.List;
 
@@ -32,36 +29,29 @@ public class Commands implements CommandExecutor {
         Player player = (Player) commandSender;
         if (strings.length == 1) {
             if (strings[0].equals("help")) {
-                player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "~~~~ " + ChatColor.YELLOW + ChatColor.BOLD.toString() + "Mining Game Help" + ChatColor.AQUA + ChatColor.BOLD.toString() + " ~~~~");
-                player.sendMessage(ChatColor.AQUA + "/mininggame" + ChatColor.YELLOW + " join " + ChatColor.GREEN + "(Arena Name)");
-                player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "leave");
+                player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "~~~~ " + ChatColor.YELLOW + ChatColor.BOLD.toString() + "lunar Help" + ChatColor.AQUA + ChatColor.BOLD.toString() + " ~~~~");
+                player.sendMessage(ChatColor.AQUA + "/shipfuel" + ChatColor.YELLOW + " join " + ChatColor.GREEN + "(Arena Name)");
+                player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "leave");
                 if (player.hasPermission("lt.instructor")) {
-                    player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "kick " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "forcejoin " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "stop " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "start " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "list " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "groupjoin " + ChatColor.GREEN + "(Arena Name) " + ChatColor.GREEN + "(Group Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame " + ChatColor.YELLOW + "listarenas");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "kick " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "forcejoin " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "stop " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "start " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "list " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "groupjoin " + ChatColor.GREEN + "(Arena Name) " + ChatColor.GREEN + "(Group Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel " + ChatColor.YELLOW + "listarenas");
                 }
                 if (player.hasPermission("lt.admin")) {
-                    player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "~~~~ " + ChatColor.YELLOW + ChatColor.BOLD.toString() + "Mining Game Setup Help" + ChatColor.AQUA + ChatColor.BOLD.toString() + " ~~~~");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.YELLOW + "create " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.YELLOW + "delete " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "enable");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "disable");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "setloc start/lobby/end");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "addartifact");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "setminingblock");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "clearartifacts");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "arenainfo");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "removeartifact " + ChatColor.GREEN + " (number)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "setbreakcount " + ChatColor.GREEN + "(number)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "status");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.YELLOW + "reloadall");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.YELLOW + "arenalist");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.YELLOW + "reload " + ChatColor.GREEN + "(Arena Name)");
-                    player.sendMessage(ChatColor.AQUA + "/mininggame setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "minplayers/maxplayers " + ChatColor.GREEN + "(number)");
+                    player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "~~~~ " + ChatColor.YELLOW + ChatColor.BOLD.toString() + "lunar Setup Help" + ChatColor.AQUA + ChatColor.BOLD.toString() + " ~~~~");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.YELLOW + "create " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.YELLOW + "delete " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "enable");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "disable");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "setloc start/lobby/end");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "status");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.YELLOW + "reloadall");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.YELLOW + "reload " + ChatColor.GREEN + "(Arena Name)");
+                    player.sendMessage(ChatColor.AQUA + "/shipfuel setup " + ChatColor.GREEN + "(Arena Name) " + ChatColor.YELLOW + "minplayers/maxplayers " + ChatColor.GREEN + "(number)");
                 }
             } else if (strings[0].equals("leave")) {
                 if (main.isPlayerInAGame(player)) {
@@ -70,9 +60,16 @@ public class Commands implements CommandExecutor {
                         ar.leaveGame(player);
                     }
                 }
+            } else if (strings[0].equals("join")) {
+                if (main.getAllArenaNames().size() == 1) {
+                    ArenaObject ar = main.getArenaByName(main.getAllArenaNames().get(0));
+                    if (ar != null) {
+                        ar.joinGame(player);
+                    }
+                }
             } else if (strings[0].equals("listarenas") && player.hasPermission("lt.instructor")) {
                 if (!main.getAllArenaNames().isEmpty()) {
-                    player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "~~~~ " + ChatColor.YELLOW + ChatColor.BOLD.toString() + "Mining Game Arena List" + ChatColor.AQUA + ChatColor.BOLD.toString() + " ~~~~");
+                    player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "~~~~ " + ChatColor.YELLOW + ChatColor.BOLD.toString() + "lunar Arena List" + ChatColor.AQUA + ChatColor.BOLD.toString() + " ~~~~");
                     for (String i : main.getAllArenaNames()) {
                         player.sendMessage(ChatColor.GRAY + "- " + ChatColor.YELLOW + i);
                     }
@@ -104,13 +101,13 @@ public class Commands implements CommandExecutor {
                 }
             } else if (strings[0].equals("groupjoin") && player.hasPermission("lt.instructor")) {
                 if (main.isPlayerInAGame(player)) {
-                        ArenaObject ar = main.getArenaByPlayer(player);
-                        for (Player p : Bukkit.getOnlinePlayers()) {
-                            if (p.hasPermission("group." + strings[1])) {
-                                ar.joinGame(p);
-                            }
+                    ArenaObject ar = main.getArenaByPlayer(player);
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (p.hasPermission("group." + strings[1])) {
+                            ar.joinGame(p);
                         }
-                        player.sendMessage(ChatColor.GREEN + "Added all online players in group"  + strings[2] + " to game.");
+                    }
+                    player.sendMessage(ChatColor.GREEN + "Added all online players in group"  + strings[2] + " to game.");
                 } else {
                     player.sendMessage(ChatColor.RED + "You must specify an arena.");
                 }
@@ -148,11 +145,6 @@ public class Commands implements CommandExecutor {
                     if (strings[1].equals("reloadall")) {
                         main.reloadAllArenas();
                         player.sendMessage(ChatColor.YELLOW + "Reloaded all arenas.");
-                    } else if (strings[1].equalsIgnoreCase("arenalist")) {
-                        player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "~~~~ Mining Game Arenas ~~~~");
-                        for (String ar : main.getAllArenaNames()) {
-                            player.sendMessage(ChatColor.GRAY + " - " + ChatColor.YELLOW + ar);
-                        }
                     }
                 }
             } else if (strings[0].equals("forcejoin") && player.hasPermission("lt.instructor")) {
@@ -210,53 +202,6 @@ public class Commands implements CommandExecutor {
                                     main.updateArena(ymler.getArena(arenaName));
                                 } catch (Exception e) {
                                     player.sendMessage(ChatColor.RED + e.getMessage());
-                                }
-                            } else if (strings[2].equalsIgnoreCase("addartifact")) {
-                                if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
-                                    player.sendMessage(ChatColor.RED + "You must be holding an item to add it.");
-                                } else {
-                                    ymler.addArtifact(arenaName, player.getInventory().getItemInMainHand());
-                                    player.sendMessage(ChatColor.GREEN + "Successfully added item in hand as an artifact.");
-                                }
-                            } else if (strings[2].equalsIgnoreCase("setminingblock")) {
-                                if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
-                                    player.sendMessage(ChatColor.RED + "You must be holding an item to add it.");
-                                } else {
-                                    ymler.setBlockType(arenaName, player.getInventory().getItemInMainHand().getType());
-                                    player.sendMessage(ChatColor.GREEN + "Successfully set the mining material to be of held block type.");
-                                }
-                            } else if (strings[2].equalsIgnoreCase("clearartifacts")) {
-                               ymler.clearArtifacts(arenaName);
-                               player.sendMessage(ChatColor.GRAY + "Cleared all artifacts from arena " + arenaName + ". " + ChatColor.RED + "Please add at least one before the next reload or the arena will not work.");
-                            } else if (strings[2].equalsIgnoreCase("arenainfo")) {
-                                player.sendMessage(ChatColor.AQUA + ChatColor.BOLD.toString() + "Arena " + arenaName + " Info");
-                                ArenaObject obj = main.getArenaByName(arenaName);
-                                int num = 0;
-                                for (ItemStack item : obj.getArtifacts()) {
-                                    num++;
-                                    player.sendMessage(ChatColor.YELLOW.toString() + num + ChatColor.GRAY + " - " + item.getItemMeta().getDisplayName());
-                                }
-                            } else if (strings[2].equalsIgnoreCase("removeartifact")) {
-                                ArenaObject obj = main.getArenaByName(arenaName);
-                                if (Integer.valueOf(strings[3]) != null) {
-                                    Integer num = Integer.valueOf(strings[3]);
-                                    if (obj.getArtifacts().size() <= num) {
-                                        try {
-                                            ymler.removeArtifact(arenaName, num);
-                                        } catch (Exception e) {
-                                            player.sendMessage(ChatColor.RED + e.getMessage());
-                                        }
-                                    } else {
-                                        player.sendMessage(ChatColor.RED + "This is not a valid number for removal.");
-                                    }
-                                }
-                            } else if (strings[2].equalsIgnoreCase("setbreakcount")) {
-                                if (Integer.valueOf(strings[3]) != null) {
-                                    Integer num = Integer.valueOf(strings[3]);
-                                    ymler.setBreakCount(arenaName, num);
-                                    player.sendMessage(ChatColor.GREEN + "Set Break Count for arena " + arenaName + " to " + strings[3] + ".");
-                                } else {
-                                    player.sendMessage(ChatColor.RED + "This is not a valid number for removal.");
                                 }
                             } else if (strings[2].equalsIgnoreCase("disable")) {
                                 ymler.disableArena(arenaName);

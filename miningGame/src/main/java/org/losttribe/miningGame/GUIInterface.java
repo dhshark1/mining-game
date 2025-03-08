@@ -1,4 +1,4 @@
-package org.losttribe;
+package org.losttribe.miningGame;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.losttribe.miningGame.MiningGame;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,8 +18,6 @@ public class GUIInterface {
     public GUIInterface(MiningGame main) {
         this.main = main;
     }
-
-    // yes I know the I already stands for interface
 
     public ItemStack getPlayerHead(Player p, String lore) {
         ItemStack personHead = new ItemStack(Material.PLAYER_HEAD);
